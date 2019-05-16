@@ -1,22 +1,20 @@
 <template>
   <v-app>
-    <ph-toolbar />
+    <DefaultToolbar />
     <v-content class="mb-5 pb-2">
       <v-container grid-list-lg>
         <nuxt />
       </v-container>
     </v-content>
-    <ph-footer />
   </v-app>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import PhFooter from '~/layouts/ph-footer.vue'
-import PhToolbar from '~/layouts/ph-toolbar.vue'
+import DefaultToolbar from './default/DefaultToolbar.vue'
 
 @Component({
-  components: { PhToolbar, PhFooter }
+  components: { DefaultToolbar }
 })
 export default class Index extends Vue {
   // props

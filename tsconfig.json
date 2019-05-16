@@ -3,11 +3,9 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "dom"
-    ],
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "plugins": [{ "name": "ts-vue-plugin" }],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowJs": true,
@@ -17,16 +15,9 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "~/*": ["./*"],
+      "@/*": ["./*"]
     },
-    "types": [
-      "@types/node",
-      "@nuxt/vue-app"
-    ]
+    "types": ["@types/node", "@nuxt/vue-app"]
   }
 }

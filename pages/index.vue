@@ -1,29 +1,71 @@
 <template>
   <v-layout row wrap>
-    <v-flex v-for="n in 9" :key="n" xs6 sm4 md2>
-      <v-card hover ripple tile>
-        <v-img src="https://via.placeholder.com/150/00ff" height="150px" />
-        <v-card-title>
-          <div>
-            <span class="grey--text">Author</span><br />
-            <span>Whitehaven Beach</span>
-          </div>
-        </v-card-title>
-      </v-card>
-    </v-flex>
+    <AlbumCard v-for="album in albums" :key="album.id" :album="album" />
+    <photo-album-pagination
+      v-model="limit"
+      :firstPage="firstPage"
+      :lastPage="lastPage"
+      @increment="increment"
+      @decrement="decrement"
+    />
   </v-layout>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { Album } from '~/utils/types'
+import AlbumCard from '~/components/albums/AlbumCard.vue'
 
-@Component
+@Component({
+  name: 'Albums',
+  head() {
+    return {
+      title: 'Photo Album'
+    }
+  },
+  components: {
+    AlbumCard
+  },
+  async asyncData({ app, query }) {
+    if (!query._limit) (query._limit as string) = '20'
+    const { data, headers } = await app.$api.albums.index(query)
+    return {
+      albums: data,
+      total_count: headers['x-total-count']
+    }
+  }
+})
 export default class Index extends Vue {
-  // props
-  // data
-  // vuex
-  // computed
-  // watch
-  // hooks
-  // methods
+  albums: Album[] = []
+  total_count: number = 100
+  limit: number = 20
+  start: number = 0
+  increment() {
+    if (this.lastPage) return
+    this.start += this.limit
+    this.fetchNewData()
+  }
+  decrement() {
+    if (this.firstPage) return
+    this.start -= this.limit
+    this.fetchNewData()
+  }
+  get lastPage(): boolean {
+    return this.start + this.limit >= this.total_count
+  }
+  get firstPage(): boolean {
+    return this.start - this.limit < 0
+  }
+  async fetchNewData() {
+    const params = {
+      _limit: this.limit,
+      _start: this.start
+    }
+    const { data } = await this.$api.albums.index(params)
+    this.albums = data
+  }
+  @Watch('limit')
+  onLimitChanged() {
+    this.fetchNewData()
+  }
 }
 </script>

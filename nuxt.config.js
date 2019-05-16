@@ -18,6 +18,9 @@ export default {
       }
     ]
   },
+  server: {
+    port: 8080
+  },
   loading: { color: '#fff' },
   css: [
     {
@@ -29,10 +32,10 @@ export default {
       lang: 'scss'
     }
   ],
-  plugins: ['~plugins/vuetify.js'],
+  plugins: ['~plugins/vuetify.ts', '~plugins/ui.ts', '~plugins/api.ts'],
   modules: ['@nuxtjs/axios'],
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'https://jsonplaceholder.typicode.com/'
   },
   build: {
     loaders: {},

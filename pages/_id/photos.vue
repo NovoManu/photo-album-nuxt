@@ -1,44 +1,75 @@
 <template>
   <v-layout row wrap>
-    <v-flex v-for="n in 9" :key="n" xs6 sm4 md2>
-      <v-dialog v-model="dialog" width="100vh" height="100vh">
-        <template v-slot:activator="{ on }">
-          <v-card hover ripple tile v-on="on">
-            <v-img src="https://via.placeholder.com/150" height="150px" />
-            <v-card-title>
-              <div>
-                <span>Whitehaven Beach</span>
-              </div>
-            </v-card-title>
-          </v-card>
-        </template>
-
-        <v-card hover ripple tile>
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            width="auto"
-            height="auto"
-            max-height="100%"
-            max-width="100%"
-            contain
-            class="grey darken-4"
-          />
-        </v-card>
-      </v-dialog>
-    </v-flex>
+    <PhotoCard v-for="photo in photos" :key="photo.id" :photo="photo" />
+    <photo-album-pagination
+      v-model="limit"
+      :firstPage="firstPage"
+      :lastPage="lastPage"
+      @increment="increment"
+      @decrement="decrement"
+    />
   </v-layout>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { Photo } from '~/utils/types'
+import PhotoCard from '~/components/photos/PhotoCard.vue'
 
-@Component
+@Component({
+  name: 'Photos',
+  head() {
+    return {
+      title: 'Photos Album: photos'
+    }
+  },
+  components: {
+    PhotoCard
+  },
+  async asyncData({ app, query, params }) {
+    if (!query._limit) (query._limit as string) = '20'
+    const { data, headers } = await app.$api.photos.index({
+      ...query,
+      albumId: params.id
+    })
+    return {
+      photos: data,
+      total_count: headers['x-total-count']
+    }
+  }
+})
 export default class photos extends Vue {
-  // props
-  // data
-  // vuex
-  // computed
-  // watch
-  // hooks
-  // methods
+  photos: Photo[] = []
+  total_count: number = 100
+  limit: number = 20
+  start: number = 0
+  get lastPage(): boolean {
+    return this.start + this.limit >= this.total_count
+  }
+  get firstPage(): boolean {
+    return this.start - this.limit < 0
+  }
+  increment() {
+    if (this.lastPage) return
+    this.start += this.limit
+    this.fetchNewData()
+  }
+  decrement() {
+    if (this.firstPage) return
+    this.start -= this.limit
+    this.fetchNewData()
+  }
+  async fetchNewData() {
+    const params = {
+      _limit: this.limit,
+      _start: this.start,
+      albumId: this.$nuxt.$route.params.id
+    }
+    const { data } = await this.$api.photos.index(params)
+    this.photos = data
+  }
+  @Watch('limit')
+  onLimitChanged() {
+    this.fetchNewData()
+  }
 }
 </script>
