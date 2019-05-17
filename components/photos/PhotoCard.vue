@@ -1,34 +1,44 @@
 <template>
-  <v-flex xs6 sm4 md2>
-    <v-dialog v-model="dialog" width="100vh" height="100vh">
-      <template v-slot:activator="{ on }">
-        <v-card hover ripple tile v-on="on">
-          <v-img
-            v-if="photo.thumbnailUrl"
-            :src="photo.thumbnailUrl"
-            height="150px"
-          />
-          <v-img v-else src="https://via.placeholder.com/150" height="150px" />
-          <v-card-title>
-            <div>
-              <span>{{ photo.title }}</span>
+  <div class="card d-flex">
+    <v-layout row wrap align-start>
+      <v-dialog v-model="dialog" width="100%" max-width="600">
+        <template v-slot:activator="{ on }">
+          <v-card
+            class="card-photo"
+            color="transparent"
+            ripple
+            tile
+            flat
+            v-on="on"
+          >
+            <v-img v-if="photo.thumbnailUrl" :src="photo.thumbnailUrl" />
+            <v-img v-else src="https://via.placeholder.com/150" />
+            <div class="card-photo__back">
+              <div class="my-title d-flex align-center justify-center">
+                <v-icon large color="white">zoom_in</v-icon>
+              </div>
             </div>
-          </v-card-title>
+          </v-card>
+        </template>
+        <v-card
+          max-height="600"
+          height="100%"
+          max-width="600"
+          width="100%"
+          class="card-modal"
+        >
+          <v-img :src="photo.url" width="auto" height="auto" contain>
+            <div class="description">
+              <span class="my-caption lg">{{ photo.title }}</span>
+            </div>
+          </v-img>
         </v-card>
-      </template>
-      <v-card hover ripple tile>
-        <v-img
-          :src="photo.url"
-          width="auto"
-          height="auto"
-          max-height="100%"
-          max-width="100%"
-          contain
-          class="grey darken-4"
-        />
-      </v-card>
-    </v-dialog>
-  </v-flex>
+      </v-dialog>
+      <v-card-title class="pt-0">
+        <span class="my-caption">{{ photo.title }}</span>
+      </v-card-title>
+    </v-layout>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'

@@ -1,0 +1,103 @@
+@import '../utilities/_all';
+
+.card {
+  padding: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  &-album,
+  &-photo,
+  &-modal {
+    border: 8px solid $white-bis;
+    .description {
+      width: 100%;
+      height: auto;
+      padding: 8px;
+      bottom: 0;
+      left: 0;
+      background: $primary-tr;
+      color: $white-bis;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+  &-photo {
+    width: 100%;
+    &__back {
+      position: absolute;
+      background: $primary-tr;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    &:hover > .card-photo__back {
+      opacity: 1;
+    }
+  }
+}
+
+@media (min-width: 0) {
+  .card {
+    flex-basis: 100%;
+    flex-grow: 0;
+    max-width: 100%;
+    &-album {
+      .description {
+        position: static;
+        .my-caption {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .card {
+    flex-basis: 33.33333333333333%;
+    flex-grow: 0;
+    max-width: 33.33333333333333%;
+    &-album {
+      .description {
+        position: absolute;
+        .my-caption {
+          display: none;
+        }
+      }
+    }
+    &:hover {
+      transform: translate3d(0, -10px, 0);
+
+      .description {
+        height: 100%;
+        top: 0;
+
+        .my-caption {
+          display: block;
+        }
+      }
+    }
+    &-modal:hover {
+      .description {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 960px) {
+  .card {
+    flex-basis: 20%;
+    flex-grow: 0;
+    max-width: 20%;
+  }
+}

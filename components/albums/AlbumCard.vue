@@ -1,21 +1,18 @@
 <template>
-  <v-flex xs6 sm4 md2 @click="redirectToAlbum">
-    <v-card hover ripple tile>
+  <div class="card d-flex">
+    <v-card class="card-album" ripple tile @click="redirectToAlbum">
       <v-img
         :src="`https://via.placeholder.com/150/${colors[album.userId]}/808080`"
-        height="150px"
       />
-      <v-card-title>
-        <div>
-          <span>{{ album.title }}</span>
-          <span class="grey--text">
-            <small>by</small> {{ user.name || 'User not found' }}
-          </span>
-          <br />
-        </div>
-      </v-card-title>
+      <div class="description">
+        <span class="my-caption text-xs-center">{{ album.title }}</span>
+        <small>by</small>
+        <span>
+          {{ user.name || 'User not found' }}
+        </span>
+      </div>
     </v-card>
-  </v-flex>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'

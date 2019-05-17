@@ -1,8 +1,7 @@
 <template>
   <v-app>
-    <DefaultToolbar />
     <v-content class="mb-5 pb-2">
-      <v-container grid-list-lg>
+      <v-container>
         <nuxt />
       </v-container>
     </v-content>
@@ -11,11 +10,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import DefaultToolbar from './default/DefaultToolbar.vue'
 
-@Component({
-  components: { DefaultToolbar }
-})
+@Component
 export default class Index extends Vue {
   // props
   // data

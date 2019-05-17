@@ -1,5 +1,9 @@
 <template>
   <v-layout row wrap>
+    <v-flex xs12>
+      <span class="my-title lg">Albums title</span>
+      <div class="my-subtitle">Author</div>
+    </v-flex>
     <PhotoCard v-for="photo in photos" :key="photo.id" :photo="photo" />
     <photo-album-pagination
       v-model="limit"
