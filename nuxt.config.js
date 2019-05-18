@@ -32,7 +32,12 @@ export default {
       lang: 'scss'
     }
   ],
-  plugins: ['~plugins/vuetify.ts', '~plugins/ui.ts', '~plugins/api.ts'],
+  plugins: [
+    '~plugins/vuetify.ts',
+    '~plugins/ui.ts',
+    '~plugins/api.ts',
+    '~plugins/visibility-observer.ts'
+  ],
   modules: ['@nuxtjs/axios'],
   axios: {
     baseURL: 'https://jsonplaceholder.typicode.com/'

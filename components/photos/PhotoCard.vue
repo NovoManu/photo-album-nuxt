@@ -11,9 +11,13 @@
             flat
             v-on="on"
           >
-            <v-img v-if="photo.thumbnailUrl" :src="photo.thumbnailUrl" />
+            <v-img
+              v-if="photo.thumbnailUrl"
+              v-observe-visibility="visibilityChanged"
+              :src="photo.thumbnailUrl"
+            />
             <v-img v-else src="https://via.placeholder.com/150" />
-            <div class="card-photo__back">
+            <div v-if="visible" class="card-photo__back">
               <div class="my-title d-flex align-center justify-center">
                 <v-icon large color="white">zoom_in</v-icon>
               </div>
@@ -21,6 +25,7 @@
           </v-card>
         </template>
         <v-card
+          v-if="visible"
           max-height="600"
           height="100%"
           max-width="600"
@@ -34,7 +39,7 @@
           </v-img>
         </v-card>
       </v-dialog>
-      <v-card-title class="pt-0">
+      <v-card-title v-if="visible" class="pt-0">
         <span class="my-caption">{{ photo.title }}</span>
       </v-card-title>
     </v-layout>
@@ -48,5 +53,9 @@ import { Photo } from '~/utils/types'
 export default class PhotoCard extends Vue {
   @Prop({ required: true }) photo!: Photo
   dialog: boolean = false
+  visible: boolean = false
+  visibilityChanged(isVisible) {
+    this.visible = isVisible
+  }
 }
 </script>

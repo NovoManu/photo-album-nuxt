@@ -19,6 +19,7 @@
     "cross-env": "^5.2.0",
     "nuxt": "^2.4.0",
     "ts-vue-plugin": "^0.2.0",
+    "vue-observe-visibility": "^0.4.4",
     "vuetify": "^1.5.14"
   },
   "husky": {
