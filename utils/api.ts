@@ -11,4 +11,8 @@ export default class BaseEndpoint {
     const { data, headers } = await this.axios.get(this.resource, { params })
     return { data, headers }
   }
+  async show(id) {
+    const { data, headers } = await this.axios.get(`${this.resource}/${id}`)
+    return { data, headers }
+  }
 }

@@ -52,6 +52,8 @@ import { Photo } from '~/utils/types'
 @Component
 export default class PhotoCard extends Vue {
   @Prop({ required: true }) photo!: Photo
+  @Prop({ required: true }) albumTitle!: string
+  @Prop({ required: true }) userName!: string
   dialog: boolean = false
   visible: boolean = false
   visibilityChanged(isVisible) {

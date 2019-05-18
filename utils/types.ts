@@ -12,6 +12,10 @@ export interface User {
   id: number
 }
 
+export interface AlbumsState {
+  albums: Album[]
+}
+
 export interface Photo {
   id: number
   albumId: number
