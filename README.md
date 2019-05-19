@@ -17,4 +17,9 @@ $ npm start
 
 # start unit testing
 $ npm test
+
+# docker installation
+$ docker pull novomanu/photo-album-nuxt
+$ docker -p 8080:8080 novomanu/photo-album-nuxt
+open browser with url http://localhost:8080/
 ```
