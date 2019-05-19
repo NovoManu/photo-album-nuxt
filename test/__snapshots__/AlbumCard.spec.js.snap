@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index.vue renders component 1`] = `
+<div
+  class="card d-flex"
+>
+  <v-card
+    class="card-album"
+    ripple=""
+    tile=""
+  >
+    <v-img
+      src="https://via.placeholder.com/150/undefined/808080"
+    />
+     
+    <!---->
+  </v-card>
+</div>
+`;

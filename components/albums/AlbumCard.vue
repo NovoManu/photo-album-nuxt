@@ -24,7 +24,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
 import { Album, User } from '~/utils/types'
-import colors from '~/utils/colors'
+import colors from '~/utils/colors.ts'
 
 const UsersModule = namespace('users')
 

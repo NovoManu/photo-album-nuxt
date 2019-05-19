@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index.vue renders component 1`] = `
+<v-layout
+  row=""
+  wrap=""
+>
+  <v-flex
+    class="text-xs-center"
+    xs12=""
+  >
+    <div
+      class="my-title lg"
+    >
+      Albums
+    </div>
+     
+    <div
+      class="my-subtitle"
+    >
+      Make memories
+    </div>
+  </v-flex>
+    
+  <photo-album-pagination
+    firstpage="true"
+  />
+</v-layout>
+`;
