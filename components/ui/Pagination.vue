@@ -13,11 +13,11 @@
             @change="$emit('changed', $event)"
           />
         </v-card>
-        <v-btn icon :disabled="firstPage">
-          <v-icon @click="$emit('decrement')">chevron_left</v-icon>
+        <v-btn icon :disabled="firstPage" @click="$emit('decrement')">
+          <v-icon>chevron_left</v-icon>
         </v-btn>
-        <v-btn icon :disabled="lastPage">
-          <v-icon @click="$emit('increment')">chevron_right</v-icon>
+        <v-btn icon :disabled="lastPage" @click="$emit('increment')">
+          <v-icon>chevron_right</v-icon>
         </v-btn>
       </div>
     </v-layout>

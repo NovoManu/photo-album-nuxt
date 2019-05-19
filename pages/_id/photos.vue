@@ -1,15 +1,17 @@
 <template>
   <v-layout row wrap>
     <v-flex xs12>
-      <span class="my-title lg">{{ album.title }}</span>
+      <span class="my-title md">{{ album.title }}</span>
       <div class="my-subtitle">by {{ user.name }}</div>
     </v-flex>
     <PhotoCard
       v-for="photo in photos"
       :key="photo.id"
+      v-model="visible"
       :photo="photo"
       :albumTitle="album.title"
       :userName="user.name"
+      @changeVisibility="visible = true"
     />
     <photo-album-pagination
       v-model="limit"
@@ -58,6 +60,7 @@ export default class photos extends Vue {
   total_count: number = 100
   limit: number = 20
   start: number = 0
+  visible: boolean = false
   get lastPage(): boolean {
     return this.start + this.limit >= this.total_count
   }
@@ -78,6 +81,7 @@ export default class photos extends Vue {
     this.fetchNewData()
   }
   async fetchNewData() {
+    this.visible = false
     const params = {
       _limit: this.limit,
       _start: this.start,

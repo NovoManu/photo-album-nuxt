@@ -6,7 +6,8 @@ describe('index.vue', () => {
     propsData: {
       photo: {},
       albumTitle: 'title',
-      userName: 'name'
+      userName: 'name',
+      visible: false
     }
   })
   it('renders component', () => {
@@ -14,8 +15,5 @@ describe('index.vue', () => {
   })
   it('has initial colors', () => {
     expect(wrapper.vm.dialog).toBe(false)
-  })
-  it('has initial visible', () => {
-    expect(wrapper.vm.visible).toBe(false)
   })
 })

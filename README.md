@@ -15,6 +15,6 @@ $ npm run dev
 $ npm run build
 $ npm start
 
-# generate static project
-$ npm run generate
+# start unit testing
+$ npm test
 ```
